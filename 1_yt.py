@@ -20,6 +20,7 @@ if __name__ == "__main__":
             if ct is not None and "audio" in ct:
                 audiourl = req.url
         print("-" * 30)
+    driver.close()
 
     import re
     # r: 不做任何轉換 \n就是兩個字
@@ -28,3 +29,13 @@ if __name__ == "__main__":
     print("video:", videourl)
     print("audio:", audiourl)
 
+    from urllib.request import urlretrieve
+    urlretrieve(videourl, "video.temp")
+    urlretrieve(audiourl, "audio.temp")
+
+    import subprocess
+    import os
+    commands = ["./bin/ffmpeg", "-i", "video.temp", "-i", "audio.temp", "youtube/{}.mp4".format(time.time())]
+    subprocess.run(commands)
+    os.remove("video.temp")
+    os.remove("audio.temp")
