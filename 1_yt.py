@@ -1,7 +1,10 @@
-import undetected_chromedriver.v2 as uc
+# import undetected_chromedriver.v2 as uc
 import time
+# from seleniumwire import webdriver  # 單純的selenium
+from seleniumwire.undetected_chromedriver.v2 import Chrome
 
 if __name__ == "__main__":
-    driver = uc.Chrome()
-    driver.get("https://irs.thsrc.com.tw/IMINT/?locale=tw")
+    driver = Chrome()
+    driver.get("https://www.youtube.com/watch?v=Z2Z9V-4DMGw")
+    driver.find_element_by_class_name("ytp-play-button").click()
     time.sleep(20)
